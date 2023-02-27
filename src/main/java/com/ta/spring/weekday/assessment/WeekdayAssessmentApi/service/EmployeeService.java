@@ -64,6 +64,14 @@ public class EmployeeService {
         return updateEmpRole;
     }
 
+	public Empolyees addNewEmployee(Empolyees employees) {
+        Empolyees newEmployee = Empolyees.builder().empId(++id).empName(employees.getEmpName()).empRole(employees.getEmpRole()).build();
+		empolyees.add(newEmployee);	
+		return newEmployee;
+	}
 
+    public Empolyees getEmployee(int id) {
+        return empolyees.stream().filter(emp -> emp.getEmpId() == id).findFirst().orElse(null);        
+    }
 
 }

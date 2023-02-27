@@ -7,11 +7,15 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.Empolyees;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.EmpolyeesV2;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.EmpolyeesV2.Address;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.EmpolyeesV2.Name;
 
 @Service
 public class EmployeeService {
 
     public static List<Empolyees> empolyees = new ArrayList<Empolyees>();
+    public static List<EmpolyeesV2> empolyeesV2 = new ArrayList<EmpolyeesV2>();
     public static int id = 0;
 
     static {
@@ -23,6 +27,13 @@ public class EmployeeService {
 
     public List<Empolyees> getAllEmployees() {
         return empolyees;
+    }
+
+    public List<EmpolyeesV2> getAllEmployeesV2() {
+        Name fullName = EmpolyeesV2.Name.builder().firstName("Karthikeyan").lastName("Rajendran").build();
+        Address address = EmpolyeesV2.Address.builder().street("75, New Street").city("Chennai").country("India").postCode("600001").build();
+        empolyeesV2.add(EmpolyeesV2.builder().empId(++id).empName(fullName).empRole("Senior Test Automation Engineer").empaddress(address).build());
+        return empolyeesV2;
     }
 
     public List<Empolyees> getEmployee(Integer id, String name, String role) {

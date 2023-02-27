@@ -2,6 +2,7 @@ package com.ta.spring.weekday.assessment.WeekdayAssessmentApi.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -53,6 +54,14 @@ public class EmployeeService {
         }
 
         return filterEmployee;
+    }
+
+    public Empolyees updateEmployeeRole(int id, Empolyees reqBody) {
+        Empolyees updateEmpRole = empolyees.stream().filter(emp -> emp.getEmpId() == id).findFirst().orElse(null);
+        if(updateEmpRole != null) {
+            updateEmpRole.setEmpRole(reqBody.getEmpRole());
+        }
+        return updateEmpRole;
     }
 
 

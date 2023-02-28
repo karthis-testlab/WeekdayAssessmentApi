@@ -46,8 +46,7 @@ public class EmployeesController {
         Locale locale = LocaleContextHolder.getLocale();
         Empolyees empolyees = employeeService.getEmployee(id);
         if(empolyees == null) {
-            String errorMessage = messageSource.getMessage("user.not.found.error.message", null, "User wasn't found", locale);
-            System.out.println(errorMessage);
+            String errorMessage = messageSource.getMessage("not.found.error.message", null, "User wasn't found", locale);
             throw new EmployeeNotFoundException(errorMessage);
         }
         return employeeService.getEmployee(id);
@@ -68,7 +67,7 @@ public class EmployeesController {
         }
         URI uri= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                  .buildAndExpand(newEmpolyees.getEmpId())
-                .toUri();
+                 .toUri();
         return ResponseEntity.created(uri).body(newEmpolyees);
     }
 

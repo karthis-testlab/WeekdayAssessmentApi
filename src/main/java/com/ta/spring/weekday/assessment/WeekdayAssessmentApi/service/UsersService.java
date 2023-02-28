@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.Users;
@@ -47,6 +48,24 @@ public class UsersService {
         }
 
         return filteredUser;
+    }
+
+    public Users addUsers(Users users) {
+        Users newUser = Users.builder().id(++id).name(users.getName()).email(users.getEmail()).mobileNumber(users.getMobileNumber()).build();
+        return newUser;
+    }
+
+    public Users updateUserMobileNumber(int id, Users reqBody) {
+        Users updateUser = users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+        if(updateUser != null) {
+            updateUser.setMobileNumber(reqBody.getMobileNumber());
+        }
+        return updateUser;
+    }
+
+    public Users getIndividualUser(int id) {
+        Users user = users.stream().filter(usr -> usr.getId() == id).findFirst().orElse(null);
+        return user;
     }
 
 }

@@ -37,8 +37,18 @@ public class UsersController {
         return usersService.getAllUsers();
     }
 
+    @GetMapping(path = "/api/users", headers = {"X-API-VERSION=1"})
+    public List<Users> getAllUsersHeader() {
+        return usersService.getAllUsers();
+    }
+
     @GetMapping(path = "/api/users", produces = {"application/vnd.users.api-v2+json"})
     public List<UsersV2> getAllUsersV2() {
+        return usersService.getAllUsersV2();
+    }
+
+    @GetMapping(path = "/api/users", headers = {"X-API-VERSION=2"})
+    public List<UsersV2> getAllUsersV2Header() {
         return usersService.getAllUsersV2();
     }
 

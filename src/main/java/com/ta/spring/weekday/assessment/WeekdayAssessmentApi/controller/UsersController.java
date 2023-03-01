@@ -21,6 +21,7 @@ import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.error.handling.Empl
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.error.handling.UserNotFoundException;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.Users;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV2;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV3;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.service.UsersService;
 
 @RestController
@@ -50,6 +51,11 @@ public class UsersController {
     @GetMapping(path = "/api/users", headers = {"X-API-VERSION=2"})
     public List<UsersV2> getAllUsersV2Header() {
         return usersService.getAllUsersV2();
+    }
+
+    @GetMapping(path = "/api/users", headers = {"X-API-VERSION=3"})
+    public ResponseEntity<UsersV3> getAllUsersV3Header() {
+        return ResponseEntity.ok().body(usersService.getAllUsersV3());
     }
 
     @GetMapping(path = "/api/user/{id}")

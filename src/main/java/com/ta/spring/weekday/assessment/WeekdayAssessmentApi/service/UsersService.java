@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.Users;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV2;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV3;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV2.Name;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV3.DataKey;
+import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV3.Support;
 
 @Service
 public class UsersService {
@@ -34,6 +37,21 @@ public class UsersService {
         Name name = UsersV2.Name.builder().firstName("Karthikeyan").lastName("Rajendran").build();
         usersV2.add(UsersV2.builder().id(++id).email("karhikeyan.rajendran@reqres.in").fullName(name).mobileNumber("9876543214").build());
         return usersV2;
+    }
+
+    public UsersV3 getAllUsersV3() {
+
+        List<DataKey> data = new ArrayList<DataKey>();
+        data.add(UsersV3.DataKey.builder().id(++id).email("michael.lawson@reqres.in").firstName("Michael").lastName("Lawson").avatar("https://reqres.in/img/faces/7-image.jpg").build());
+        data.add(UsersV3.DataKey.builder().id(++id).email("lindsay.ferguson@reqres.in").firstName("Lindsay").lastName("Ferguson").avatar("https://reqres.in/img/faces/8-image.jpg").build());
+        
+        Support support = new Support();
+        support = UsersV3.Support.builder().url("https://reqres.in/#support-heading").text("To keep ReqRes free, contributions towards server costs are appreciated!").build();
+        
+        UsersV3 usersV3 = UsersV3.builder().page(2).perPage(6).total(12).totalPages(2).data(data).support(support).build();
+
+        return usersV3;
+
     }
 
     public List<Users> filterUser(Integer id, String name) {

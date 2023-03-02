@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.github.javafaker.Faker;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.Users;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV2;
 import com.ta.spring.weekday.assessment.WeekdayAssessmentApi.model.UsersV3;
@@ -19,14 +20,15 @@ public class UsersService {
     
     public static List<Users> users = new ArrayList<Users>();
     public static List<UsersV2> usersV2 = new ArrayList<UsersV2>();
+    public static Faker faker = new Faker();
     private static int id = 0;
 
     static {
-        users.add(Users.builder().id(++id).email("michael.lawson@reqres.in").name("Michael Lawson").mobileNumber("9876543210").build());
-        users.add(Users.builder().id(++id).email("lindsay.ferguson@reqres.in").name("Lindsay Ferguson").mobileNumber("9876543211").build());
-        users.add(Users.builder().id(++id).email("tobias.funke@reqres.in").name("Tobias Funke").mobileNumber("9876543212").build());
-        users.add(Users.builder().id(++id).email("byron.fields@reqres.in").name("Byron Fields").mobileNumber("9876543213").build());
+        users.add(Users.builder().id(++id).email("michael.lawson@reqres.in").name("Michael Lawson").mobileNumber("9876543210").build());       
         users.add(Users.builder().id(++id).email("michael.lawson2@reqres.in").name("Michael Lawson").mobileNumber("9876543210").build());
+        for (int i = 0; i < 5; i++) {
+            users.add(Users.builder().id(++id).email(faker.internet().emailAddress()).name(faker.name().fullName()).mobileNumber(faker.phoneNumber().cellPhone()).build());
+        }
     }
 
     public List<Users> getAllUsers() {
